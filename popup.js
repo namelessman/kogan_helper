@@ -1,14 +1,13 @@
-// 当popup页面加载时发送消息给background脚本请求数据
 chrome.runtime.sendMessage({ action: "getUsageSummary" });
 
-// 监听来自background脚本的消息
+
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.action === "usageSummaryData") {
     displayUsageSummary(message.data);
   }
 });
 
-// 在popup页面上展示使用情况摘要
+
 function displayUsageSummary(data) {
   const usageSummaryDiv = document.getElementById("usageSummary");
 
