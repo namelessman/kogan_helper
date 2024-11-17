@@ -6,10 +6,10 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 10px;
-      background-color: #f4f4f4;
+      padding: 0;
       margin: 0;
-      width: 200px;
+      background-color: #f9f9f9;
+      width: 300px;
     }
 
     h2,
@@ -19,26 +19,43 @@
     }
 
     p {
-      color: #666;
-      margin: 5px 0;
+      color: #333;
     }
 
     .summary-container {
-      background-color: #fff;
-      border-radius: 5px;
-      padding: 20px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 0 20px;
+      max-width: 300px;
+      font-size: 14px;
+      color: #333;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .highlight {
-      background-color: #ffeb3b;
+      background-color: #fffae6;
+      padding: 5px 10px;
+      border-radius: 5px;
       font-weight: bold;
-      padding: 2px 4px;
-      border-radius: 3px;
+      color: #e88e00;
+      display: inline-block;
+      margin-top: 10px;
     }
 
-    .section {
+    .section p {
+      margin-bottom: 20px;
+    }
+
+    .summary-container .mb-0 {
+      margin-bottom: 0px;
+    }
+
+    #usageSummary {
       margin-bottom: 20px;
     }
   </style>
@@ -47,7 +64,7 @@
 <body>
   <div class="summary-container">
     <h2>Usage Summary</h2>
-    <div id="usageSummary">please go to <a target="_blank" href="https://accounts.koganmobile.co.nz/">kogan mobile</a>
+    <div id="usageSummary">Please go to <a target="_blank" href="https://accounts.koganmobile.co.nz/">kogan mobile</a>
       and log in</div>
   </div>
   <script src="popup.js"></script>
