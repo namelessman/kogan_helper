@@ -2,6 +2,7 @@ import {
   LOW_DATA_THRESHOLD,
   NOTIFICATION_ICON_URL,
   NOTIFICATION_TITLE,
+  CHECK_INTERVAL,
   IS_MOCK,
 } from "./config.js";
 import { mock } from "./mockData.js";
