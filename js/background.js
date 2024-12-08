@@ -74,15 +74,18 @@ async function dailyCheck(forceNotification = false) {
       .then((response) => response.json())
       .then((data) => {
         if (!data?.plan) {
-          // chrome.storage.local.set({ enabledNotify: false }, () => {
-          //   chrome.notifications.create({
-          //     type: "basic",
-          //     iconUrl: NOTIFICATION_ICON_URL,
-          //     title: NOTIFICATION_TITLE,
-          //     message:
-          //       "Please log in to Kogan Mobile to check your data usage daily.",
-          //   });
-          // });
+          chrome.storage.local.set(
+            { enabledNotify: false }
+            //   () => {
+            //   chrome.notifications.create({
+            //     type: "basic",
+            //     iconUrl: NOTIFICATION_ICON_URL,
+            //     title: NOTIFICATION_TITLE,
+            //     message:
+            //       "Please log in to Kogan Mobile to check your data usage daily.",
+            //   });
+            // }
+          );
           return;
         }
         const remaining =
