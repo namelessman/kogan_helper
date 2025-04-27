@@ -3,17 +3,6 @@ chrome.runtime.sendMessage({ action: "getUsageSummary" });
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.action === "usageSummaryData") {
     displayUsageSummary(message.data);
-
-    setTimeout(() => {
-      document
-        .getElementById("enable_notify")
-        .addEventListener("change", onNotifyChange);
-      document
-        .getElementById("testNotification")
-        .addEventListener("click", function () {
-          chrome.runtime.sendMessage({ action: "testNotification" });
-        });
-    }, 100);
   }
 });
 
@@ -47,9 +36,12 @@ function displayUsageSummary(data) {
   const usageSummaryDiv = document.getElementById("usageSummary");
 
   const plan = data?.plan;
+  hideLoading();
   if (!plan) {
+    showLogin();
     return;
   }
+
   const dataEntitlement = plan.entitlements.find(
     (entitlement) => entitlement.entitlementType === "DATA"
   );
@@ -60,14 +52,14 @@ function displayUsageSummary(data) {
   chrome.storage.local.get("enabledNotify", function (result) {
     console.log("enabledNotify", result.enabledNotify);
     const innerHTML = `
-        <div>
+        <div class="section-card">
       <div class="section">
         <p><strong>Plan:</strong> ${plan.title}</p>
         <p><strong>Description:</strong> ${plan.description}</p>
         <p><strong>Data Allowance:</strong> ${
           dataEntitlement.totalAllowance.amount
         } ${dataEntitlement.totalAllowance.unit}</p>
-        <p><strong>Remaining Data:</strong> ${
+        <p class="strong"><strong>Remaining Data:</strong> ${
           dataEntitlement.remainingAllowance.amount
         } ${dataEntitlement.remainingAllowance.unit}</p>
         <p class="highlight mb-0"><strong>End Date:</strong> ${
@@ -95,4 +87,37 @@ function displayUsageSummary(data) {
     `;
     usageSummaryDiv.innerHTML = innerHTML;
   });
+
+  setTimeout(() => {
+    addListenerToNotify();
+  }, 1000);
+}
+
+function hideLogin() {
+  const loginDiv = document.getElementById("login-main");
+  loginDiv.style.display = "none";
+}
+
+function showLogin() {
+  const loginDiv = document.getElementById("login-main");
+  loginDiv.style.display = "block";
+}
+
+function hideLoading() {
+  const loadingDiv = document.getElementById("loading");
+  loadingDiv.style.display = "none";
+}
+
+function addListenerToNotify() {
+  if (!document) {
+    return;
+  }
+  document
+    .getElementById("enable_notify")
+    .addEventListener("change", onNotifyChange);
+  document
+    .getElementById("testNotification")
+    .addEventListener("click", function () {
+      chrome.runtime.sendMessage({ action: "testNotification" });
+    });
 }

@@ -76,7 +76,58 @@
       color: #ed193a;
     }
 
-    /* 🌙 深色模式支持 */
+    .strong {
+      color: #ed193a;
+    }
+
+    #testNotification {
+      background-color: #ed193a;
+      color: #ffffff;
+      outline: none;
+      box-shadow: none;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+
+    #testNotification:hover {
+      background-color: #b1132c;
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .loading-spinner {
+      border: 4px solid #f3f4f6;
+      border-top: 4px solid #ed193a;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
     @media (prefers-color-scheme: dark) {
       body {
         background-color: #111827;
@@ -112,27 +163,36 @@
 </head>
 
 <body>
-  <div class="section-card">
-    <h2>Kogan Mobile Summary</h2>
-    <p>Welcome! Use this extension to quickly view your mobile plan details and data usage at a glance.</p>
+  <div>
+    <div id="usageSummary">
+    </div>
   </div>
-
-  <div class="section-card">
-    <h3>🚀 Features at a Glance</h3>
-    <ul>
-      <li>✨ Easily track your Kogan Mobile plan</li>
-      <li>📌 Click the extension icon to view plan info</li>
-      <li>📅 See your expiration date and usage</li>
-      <li>🌍 Check your plan from any website</li>
-      <li>🔔 Get notifications when data is low</li>
-      <li>🔒 100% local – no data is stored or sent</li>
-      <li>🛡️ Secure and private – runs in your browser</li>
-    </ul>
+  <div id="loading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Loading your Kogan Mobile data usage...</p>
   </div>
+  <div id="login-main" style="display: none;">
+    <div class="section-card">
+      <h2>Kogan Mobile Summary</h2>
+      <p>Welcome! Use this extension to quickly view your mobile plan details and data usage at a glance.</p>
+    </div>
 
-  <a class="login-link" href="https://accounts.koganmobile.co.nz/" target="_blank" rel="noopener noreferrer">🔑 Log In
-    to Kogan Mobile</a>
+    <div class="section-card">
+      <h3>🚀 Features at a Glance</h3>
+      <ul>
+        <li>✨ Easily track your Kogan Mobile plan</li>
+        <li>📌 Click the extension icon to view plan info</li>
+        <li>📅 See your expiration date and usage</li>
+        <li>🌍 Check your plan from any website</li>
+        <li>🔔 Get notifications when data is low</li>
+        <li>🔒 100% local – no data is stored or sent</li>
+        <li>🛡️ Secure and private – runs in your browser</li>
+      </ul>
+    </div>
 
+    <a class="login-link" href="https://accounts.koganmobile.co.nz/" target="_blank" rel="noopener noreferrer">🔑 Log In
+      to Kogan Mobile</a>
+  </div>
   <div class="footer">
     <div class="section-card"
       style="margin: 0px auto; text-align: center; padding: 10px; border-radius: 10px; font-size: 14px;">
@@ -144,6 +204,8 @@
       </p>
     </div>
   </div>
+
+  <script src="popup.js"></script>
 </body>
 
 </html>

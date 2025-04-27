@@ -134,7 +134,10 @@ async function fetchUsageSummary() {
   const accountId = result.accountId;
   console.log("Account ID currently is " + accountId);
 
-  if (!accountId) return;
+  if (!accountId) {
+    chrome.runtime.sendMessage({ action: "usageSummaryData", data: null });
+    return;
+  }
 
   if (IS_MOCK) {
     chrome.runtime.sendMessage({ action: "usageSummaryData", data: mock });
@@ -147,6 +150,7 @@ async function fetchUsageSummary() {
     .then((response) => response.json())
     .then((data) => {
       if (!data?.plan) {
+        chrome.runtime.sendMessage({ action: "usageSummaryData", data: null });
         return;
       }
       chrome.runtime.sendMessage({ action: "usageSummaryData", data: data });
