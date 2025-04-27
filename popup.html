@@ -1,122 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Kogan Mobile Usage Summary</title>
+  <meta charset="UTF-8" />
+  <title>Kogan Mobile Summary</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      width: 360px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      color: #1f2937;
+    }
+
+    .section-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #1f2937;
+    }
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #374151;
+    }
+
+    ul {
+      list-style: none;
       padding: 0;
       margin: 0;
-      background-color: #f9f9f9;
-      width: 300px;
     }
 
-    h2,
-    h3 {
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #333;
-    }
-
-    .summary-container {
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 0 20px;
-      max-width: 300px;
+    li {
+      margin-bottom: 8px;
       font-size: 14px;
-      color: #333;
+      line-height: 1.5;
+    }
 
+    .login-link {
+      display: block;
+      text-align: center;
+      background-color: #ed193a;
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-top: 16px;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .login-link:hover {
+      background-color: #c3142f;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #6b7280;
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .section-card a {
+      color: #ed193a;
+    }
+
+    .strong {
+      color: #ed193a;
+    }
+
+    #testNotification {
+      background-color: #ed193a;
+      color: #ffffff;
+      outline: none;
+      box-shadow: none;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+
+    #testNotification:hover {
+      background-color: #b1132c;
+    }
+
+    .loading {
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
     }
 
-    .highlight {
-      background-color: #fffae6;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-weight: bold;
-      color: #e88e00;
-      display: inline-block;
+    .loading-spinner {
+      border: 4px solid #f3f4f6;
+      border-top: 4px solid #ed193a;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading p {
       margin-top: 10px;
+      font-size: 14px;
+      color: #6b7280;
     }
 
-    .section p {
-      margin-bottom: 20px;
-    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #111827;
+        color: #f3f4f6;
+      }
 
-    .summary-container .mb-0 {
-      margin-bottom: 0px;
-    }
+      .section-card {
+        background-color: #1f2937;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        color: #f9fafb;
+      }
 
-    #usageSummary {
-      margin-bottom: 20px;
-    }
+      .section-card a {
+        color: #ff7f7f;
+      }
 
-    .ope_section {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: #eee 1px solid;
-    }
+      h2,
+      h3 {
+        color: #f9fafb;
+      }
 
-    .ope_section button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 15px;
-      margin: 10px 0;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
 
-    .ope_section button:hover {
-      background-color: #45a049;
-    }
+      .login-link {
+        background-color: #ed193a;
+        color: white;
+      }
 
-    /* Tooltip container */
-    .tooltip {
-      position: relative;
-      display: inline-block;
-      border-bottom: 1px dotted black;
-      /* If you want dots under the hoverable text */
-    }
-
-    /* Tooltip text */
-    .tooltip .tooltiptext {
-      visibility: hidden;
-      width: 200px;
-      background-color: black;
-      color: #fff;
-      text-align: center;
-      padding: 5px 0;
-      border-radius: 6px;
-      bottom: 20px;
-      left: 0;
-
-      /* Position the tooltip text - see examples below! */
-      position: absolute;
-      z-index: 1;
-    }
-
-    /* Show the tooltip text when you mouse over the tooltip container */
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
+      .login-link:hover {
+        background-color: #b1132c;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="summary-container">
-    <h2>Usage Summary</h2>
-    <div id="usageSummary">Please go to <a target="_blank" href="https://accounts.koganmobile.co.nz/">kogan mobile</a>
-      and log in</div>
+  <div>
+    <div id="usageSummary">
+    </div>
   </div>
+  <div id="loading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Loading your Kogan Mobile data usage...</p>
+  </div>
+  <div id="login-main" style="display: none;">
+    <div class="section-card">
+      <h2>Kogan Mobile Summary</h2>
+      <p>Welcome! Use this extension to quickly view your mobile plan details and data usage at a glance.</p>
+    </div>
+
+    <div class="section-card">
+      <h3>🚀 Features at a Glance</h3>
+      <ul>
+        <li>✨ Easily track your Kogan Mobile plan</li>
+        <li>📌 Click the extension icon to view plan info</li>
+        <li>📅 See your expiration date and usage</li>
+        <li>🌍 Check your plan from any website</li>
+        <li>🔔 Get notifications when data is low</li>
+        <li>🔒 100% local – no data is stored or sent</li>
+        <li>🛡️ Secure and private – runs in your browser</li>
+      </ul>
+    </div>
+
+    <a class="login-link" href="https://accounts.koganmobile.co.nz/" target="_blank" rel="noopener noreferrer">🔑 Log In
+      to Kogan Mobile</a>
+  </div>
+  <div class="footer">
+    <div class="section-card"
+      style="margin: 0px auto; text-align: center; padding: 10px; border-radius: 10px; font-size: 14px;">
+      <p style="margin: 0;">❤️ Like this extension?
+        <a href="https://chromewebstore.google.com/detail/kogan-helper/mcponoabcngmejbmhimhmkhmkikhmphe" target="_blank"
+          style="text-decoration: underline; margin-left: 4px;">
+          Leave a review
+        </a>
+      </p>
+    </div>
+  </div>
+
   <script src="popup.js"></script>
 </body>
 
